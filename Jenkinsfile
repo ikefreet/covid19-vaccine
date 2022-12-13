@@ -8,7 +8,6 @@ pipeline {
         git branch: 'main', url: 'https://github.com/ikefreet/covid19-vaccine.git'
       }
     }
-}
     stage('Build Docker Image') {
       agent any
       steps {
@@ -29,6 +28,7 @@ pipeline {
         }
       }
     }
+  }
 }
 
 
