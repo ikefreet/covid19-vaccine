@@ -7,7 +7,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
+    - port: 8080
       nodePort: 31111
   selector:
     app: wordpress
@@ -21,7 +21,7 @@ spec:
     service:
       name: wordpress
       port:
-       number: 80
+       number: 8080
   rules:
   - host: www.vaccinbook.com
     http:
@@ -32,12 +32,12 @@ spec:
           service:
             name: wordpress
             port:
-              number: 80
+              number: 8080
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: webapp-data-pvc01
+  name: webapp-data-pvc
   labels:
     app: wordpress
 spec:
@@ -45,25 +45,8 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Gi
-  volumeName: webapp-data-pv01
-  storageClassName: ''
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: webapp-data-pv01
-  labels:
-    app: wordpress
-spec:
-  capacity:
-    storage: 20Gi
-  accessModes:    
-  - ReadWriteMany 
-  persistentVolumeReclaimPolicy: Retain  
-  nfs:  
-    path: /apps/datastore/
-    server: 192.168.56.11
+      storage: 1Gi
+  storageClassName: nfs-client
 ---
 apiVersion: apps/v1 
 kind: Deployment
@@ -88,32 +71,27 @@ spec:
         app: wordpress
     spec:
       containers:
-      - image: wordpress:4.8-apache
+      - image: hmhub/wordpress:4
         name: wordpress
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql
-        - name: WORDPRESS_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: wordpress
-        readinessProbe:
-          periodSeconds: 5
-          httpGet:
-            path: /
-            port: 80
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          successThreshold: 1
-          failureThreshold: 3
+        volumeMounts:
+        - name: wordpress-persistent-storage
+          mountPath: /var/www/html
+#        readinessProbe:
+#          periodSeconds: 5
+#          httpGet:
+#            path: /
+#           port: 8080
+#        livenessProbe:
+#          httpGet:
+#            path: /health
+#            port: 8080
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#          successThreshold: 1
+#          failureThreshold: 3
         resources:
           requests:
             cpu: 50m
@@ -121,10 +99,7 @@ spec:
           limits:
             cpu: 100m
             memory: 20Mi
-        volumeMounts:
-        - name: wordpress-persistent-storage
-          mountPath: /var/www/html
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
-          claimName: webapp-data-pvc01
+          claimName: webapp-data-pvc
