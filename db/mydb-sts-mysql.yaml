@@ -59,8 +59,8 @@ spec:
       - name: mysql
         image: mysql:5.7
         env:
-        - name: MYSQL_ALLOW_EMPTY_PASSWORD
-          value: "1"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123"
         ports:
         - name: mysql
           containerPort: 3306
@@ -113,7 +113,7 @@ spec:
                   -e "$(<change_master_to.sql.in), \
                           MASTER_HOST='mydb-0.mydb', \
                           MASTER_USER='root', \
-                          MASTER_PASSWORD='', \
+                          MASTER_PASSWORD='123', \
                           MASTER_CONNECT_RETRY=10; \
                         START SLAVE;" || exit 1
             mv change_master_to.sql.in change_master_to.sql.orig
