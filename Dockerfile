@@ -1,7 +1,11 @@
-FROM wordpress:latest
-WORKDIR /var/www/html
-COPY portsconf.txt /etc/apache2/ports.conf
-COPY siteenable.txt /etc/apache2/sites-enabled/000-default.conf
+FROM python:3.9-alpine3.17
+EXPOSE 8000
+WORKDIR /django/mysite/
+COPY requirements.txt .
+RUN apk update
+RUN apk add gcc musl-dev mariadb-connector-c-dev 
+RUN pip3 install -r requirements.txt --no-cache-dir
+RUN apk del gcc musl-dev
 ADD cmd.sh /
 RUN chmod +x /cmd.sh
 CMD ["/cmd.sh"]

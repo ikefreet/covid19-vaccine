@@ -1,1 +1,3 @@
-echo "ServerName localhost" >> /etc/apache2/apache2.conf
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver 0.0.0.0:8000

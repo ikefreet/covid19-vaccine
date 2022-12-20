@@ -1,34 +1,4 @@
 apiVersion: v1
-kind: Service
-metadata:
-  name: wordpress
-  labels:
-    app: wordpress
-spec:
-  type: NodePort
-  ports:
-    - port: 80
-      targetPort: 80
-      nodePort: 31111
-  selector:
-    app: wordpress
-    tier: frontend
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: wp-pv
-spec:
-  capacity:
-    storage: 25Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    server: 192.168.56.11
-    path: /nfsvolume
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: wp-pvc
@@ -36,13 +6,14 @@ metadata:
     app: wordpress
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
+  storageClassName: nfs-client
 ---
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: 
 metadata:
   name: wordpress
   labels:
@@ -60,15 +31,19 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress:4.8-apache
+      - image: efreet05/wordpress:{}
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
-          value: mydb
+          value: mydb.default.svc.cluster.local
+        - name: WORDPRESS_DB_USER
+          value: root
         - name: WORDPRESS_DB_PASSWORD
-          value: qwer1234
+          value: dkagh1.
+        - name: WORDPRESS_DB_NAME
+          value: wordpress
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: wordpress
         volumeMounts:
         - name: wordpress-persistent-storage
