@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container'>
+    <h5 class="my-3 border-bottom pb2">코로나 백신 예약</h5>
+    <form action="{% url 'pybo:reservation' %}" method='post' class='post-form my-3'>
+        {% csrf_token %}
+        이름 : <input type="text" name="NAME" id="NAME"><br>
+        생일 : <input type="text" name="BIRTH" id="BIRTH"><br>
+        <select name="HOSPITAL" id='HOSPITAL'>
+            <option value="0">병원을 고르세요</option>
+               <option value="가">가 병원</option>
+               <option value="나">나 병원</option>
+               <option value="다">다 병원</option>
+       </select>
+       <br>
+       <select name="VACCINE" id='VACCINE'>
+        <option value="0">접종할 백신 종류를 고르세요</option>
+           <option value="화이자">화이자</option>
+           <option value="모더나">모더나</option>
+           <option value="아스트라제네카">아스트라제네카</option>
+   </select>
+        <p><span>날짜 : </span><input type="date" name="DATE" id='DATE'></p>
+        <select name="HOUR">
+            <option value="0" id='HOUR'>시간을 선택하세요.</option>
+               <option value="10">10:00</option>
+               <option value="11">11:00</option>
+               <option value="12">12:00</option>
+               <option value="13">13:00</option>
+               <option value="14">14:00</option>
+               <option value="15">15:00</option>
+               <option value="16">16:00</option>
+               <option value="17">17:00</option>
+       </select>
+       <br>
+        <button type='submit' class='btn btn-primary'>저장하기</button>
+    </form>
+    <script>
+        var now_utc = Date.now()
+        var timeOff = new Date().getTimezoneOffset()*60000;
+        var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+        document.getElementById("Date").setAttribute("min", today);
+    </script>
+</div>
+
+{% endblock %}
