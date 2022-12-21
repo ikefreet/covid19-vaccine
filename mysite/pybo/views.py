@@ -46,30 +46,22 @@ def question_create(request):
 def reservation(request):
     if request.method == "POST":
         form = ReservationForm(request.POST)
-        n = "update pybo_reservation set NAME=%s" + "where HOSPITAL=%s" + "AND HOUR=%s"
-        b = "update pybo_reservation set BIRTH=%s" + "where HOSPITAL=%s" + "AND HOUR=%s"
-        v = "update pybo_reservation set VACCINE=%s" + "where HOSPITAL=%s" + "AND HOUR=%s"
-        d = "update pybo_reservation set DATE=%s" + "where HOSPITAL=%s" + "AND HOUR=%s"
-        check = "select NAME from pybo_reservation where HOSPITAL=%s and HOUR=%s"
+        n = "INSERT INTO pybo_reservation (NAME, BIRTH, HOSPITAL, VACCINE, DATE, HOUR) VALUE (%s, %s, %s, %s, %s, %s)"
+        check = "select NAME from pybo_reservation where HOSPITAL=%s AND DATE=%s AND HOUR=%s"
         id = "select id from pybo_reservation where HOSPITAL=%s and HOUR=%s"
-        cur.execute(check, [request.POST['HOSPITAL'], request.POST['HOUR']])
+        cur.execute(check, [request.POST['HOSPITAL'], request.POST['DATE'], request.POST['HOUR']])
         x = cur.fetchone()
-        cur.execute(id, [request.POST['HOSPITAL'], request.POST['HOUR']])
-        y = cur.fetchone()
-
         if form.is_valid():
-            if x[0] == 'N':
-                cur.execute(n, [request.POST['NAME'], request.POST['HOSPITAL'], request.POST['HOUR']])
-                cur.execute(b, [request.POST['BIRTH'], request.POST['HOSPITAL'], request.POST['HOUR']])
-                cur.execute(v, [request.POST['VACCINE'], request.POST['HOSPITAL'], request.POST['HOUR']])
-                cur.execute(d, [request.POST['DATE'], request.POST['HOSPITAL'], request.POST['HOUR']])
+            if x is None:
+                cur.execute(n, [request.POST['NAME'], request.POST['BIRTH'], request.POST['HOSPITAL'], request.POST['VACCINE'], request.POST['DATE'], request.POST['HOUR']])
                 con.commit()
+                cur.execute(id, [request.POST['HOSPITAL'], request.POST['HOUR']])
+                y = cur.fetchone()
                 context = {'state' : y[0]}
                 return render(request, 'pybo/mainpage.html', context)
             else:
                 context = { 'state' : 'False' }
                 return render(request, 'pybo/mainpage.html', context)
-
     else:
         form = ReservationForm()
         info = Reservation.objects
@@ -77,26 +69,36 @@ def reservation(request):
     return render(request, 'pybo/reservation.html', context)
 
 def reservation_check(request):
-    form = ReservationForm()
-    info = Reservation.objects
+    if request.method == "POST":
+        check = "select NAME from pybo_reservation where id=%s"
+        id = request.POST['ID']
+        st = "select * from pybo_reservation where id=%s"
+        cur.execute(check, [id])
+        x = cur.fetchone()
+        if x is not None:
+            cur.execute(st, [id])
+            z = cur.fetchone()
+            context = {'name' : z[1], 'hosp' : z[3], 'date' : z[5], 'hour' : z[6], 'vac' : z[4]}
+            print(context)
+            return render(request, 'pybo/reservation_check.html', context)
+        else:
+            context = { 'state' : 'Error' }
+            return render(request, 'pybo/reservation_check.html', context)
+    else:
+        form = ReservationForm()
+        info = Reservation.objects
     context = {'form' : form, 'info' : info}
     return render(request, 'pybo/reservation_check.html', context)
 
 def reservation_delete(request):
     if request.method == "POST":
-        n = "update pybo_reservation set NAME='N' where id=%s" 
-        b = "update pybo_reservation set BIRTH='N' where id=%s"
-        v = "update pybo_reservation set VACCINE='N' where id=%s"
-        d = "update pybo_reservation set DATE='9999-01-01' where id=%s"
         check = "select NAME from pybo_reservation where id=%s"
         id = request.POST['ID']
+        st = "delete from pybo_reservation where id=%s"
         cur.execute(check, [id])
         x = cur.fetchone()
-        if x[0] != 'N':
-            cur.execute(n, [id])
-            cur.execute(b, [id])
-            cur.execute(v, [id])
-            cur.execute(d, [id])
+        if x is not None:
+            cur.execute(st, [id])
             con.commit()
             context = {'state' : 'Delete'}
             return render(request, 'pybo/mainpage.html', context)

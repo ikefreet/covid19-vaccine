@@ -1,15 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
+<div>
+    {% if state == 'Error' %}
+    <script>
+        alert("오류입니다.");
+    </script>
+    {% else %}
+    <script>
+        alert('{{ name }}님의 예약정보는 {{ date }} {{ hour }}시에  "{{ hosp }}" 병원에서 "{{ vac }}"을 접종할 예정입니다.')
+    </script>
+    {% endif %}
+    
+</div>
 <div class='container'>
     <h5 class="my-3 border-bottom pb2">코로나 백신 예약 조회하기</h5>
-    <p>예약 번호를 입력하세요.</p>
-    <p>
+    <form action="{% url 'pybo:reservation_check' %}" method='post' class='post-form my-3'>
         {% csrf_token %}
-        <label>예약 번호</label> <input type="text" @change="input"/><br>
-        <br>
-        <button @click="click" class='btn btn-primary'>조회하기</button>
-    </p>
+        <p>예약 번호를 입력하세요</p>
+        예약 번호 : <input type="text" name="ID" id="ID"><br>
+       <br>
+        <button type='submit' class='btn btn-primary'>조회하기</button>
+    </form>
 </div>
+<br>  
 <div class='container'>
     <h5 class="my-3 border-bottom pb2">코로나 백신 예약 취소하기</h5>
     <form action="{% url 'pybo:reservation_delete' %}" method='post' class='post-form my-3'>
