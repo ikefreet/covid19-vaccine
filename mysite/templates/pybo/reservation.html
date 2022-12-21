@@ -4,8 +4,10 @@
     <h5 class="my-3 border-bottom pb2">코로나 백신 예약하기</h5>
     <form action="{% url 'pybo:reservation' %}" method='post' class='post-form my-3'>
         {% csrf_token %}
-        이름 : <input type="text" name="NAME" id="NAME"><br>
-        생년월일 : <input type="text" name="BIRTH" id="BIRTH"><br>
+        {% include "form_errors.html" %}
+        <!-- 오류표시 End -->
+        이름 : <input type="text" name="NAME" id="name_id" value="{{ form.NAME.value|default_if_none:'' }}"><br>
+        생년월일 : <input type="text" name="BIRTH" id="birth_id" value="{{ form.BIRTH.value|default_if_none:'' }}"><br>
         <select name="HOSPITAL" id='HOSPITAL'>
             <option value="0">병원을 고르세요</option>
                <option value="가">가 병원</option>
@@ -18,7 +20,7 @@
            <option value="화이자">화이자</option>
            <option value="모더나">모더나</option>
            <option value="아스트라제네카">아스트라제네카</option>
-   </select>
+        </select>
         <p><span>날짜 : </span><input type="date" name="DATE" id='DATE'></p>
         <select name="HOUR">
             <option value="0" id='HOUR'>시간을 선택하세요.</option>
@@ -33,7 +35,7 @@
        </select>
        <br>
        <br>
-        <button type='submit' class='btn btn-primary'>예약하기</button>
+        <button type='submit' id='btn_login' class='btn btn-primary'>예약하기</button>
     </form>
     <script>
         var now_utc = Date.now()

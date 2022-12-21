@@ -64,8 +64,7 @@ def reservation(request):
                 return render(request, 'pybo/mainpage.html', context)
     else:
         form = ReservationForm()
-        info = Reservation.objects
-    context = {'form' : form, 'info' : info}
+    context = {'form' : form}
     return render(request, 'pybo/reservation.html', context)
 
 def reservation_check(request):

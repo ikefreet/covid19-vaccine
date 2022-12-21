@@ -9,8 +9,8 @@ class Question(models.Model):
     create_date = models.DateTimeField()
 
 class Reservation(models.Model):
-    NAME = models.CharField(max_length=50)
-    BIRTH = models.CharField(max_length=10)
+    NAME = models.CharField(max_length=50, null=False)
+    BIRTH = models.CharField(max_length=10, null=False)
     HOSPITAL = models.CharField(max_length=50)
     VACCINE = models.CharField(max_length=50)
     DATE = models.CharField(default='YYYY-MM-DD', max_length=10)
