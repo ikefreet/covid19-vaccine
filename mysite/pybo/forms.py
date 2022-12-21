@@ -12,7 +12,7 @@ class ReservationForm(forms.ModelForm):
         fields = ['NAME', 'BIRTH', 'HOSPITAL', 'VACCINE', 'DATE', 'HOUR']
         labels = {
             'NAME' : '이름',
-            'BIRTH' : '생일',
+            'BIRTH' : '생년월일',
             'HOSPITAL' : '병원',
             'VACCINE' : '백신',
             'DATE' : '날짜',

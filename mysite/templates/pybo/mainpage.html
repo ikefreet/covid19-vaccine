@@ -1,6 +1,27 @@
 {% extends 'base.html' %}
 {% load pybo_filter %}
 {% block content %}
+<div>
+    {% if state == 'False' %}
+    <script>
+        alert("예약이 차있습니다.");
+    </script>
+    {% elif state == 'True' %}
+    {% elif state == 'Error' %}
+    <script>
+        alert("오류입니다.");
+    </script>
+    {% elif state == 'Delete' %}
+    <script>
+        alert("예약이 취소되었습니다.");
+    </script>
+    {% else %}
+    <script>
+        alert('당신의 예약 번호는 {{ state }} 입니다.')
+    </script>
+    {% endif %}
+    
+</div>
 <div class="container my-3">
     <table class="table">
         <thead>
@@ -76,6 +97,9 @@
     <br>    
     <form action = "{% url 'pybo:reservation' %}">
         <input type="submit" value="예약 페이지로 이동" class="btn btn-primary">
+    </form>
+    <form action = "{% url 'pybo:reservation_check' %}">
+        <input type="submit" value="예약 조회 페이지로 이동" class="btn btn-primary">
     </form>
 </div>
 {% endblock %}

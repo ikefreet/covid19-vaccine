@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container'>
+    <h5 class="my-3 border-bottom pb2">코로나 백신 예약 조회하기</h5>
+    <p>예약 번호를 입력하세요.</p>
+    <p>
+        {% csrf_token %}
+        <label>예약 번호</label> <input type="text" @change="input"/><br>
+        <br>
+        <button @click="click" class='btn btn-primary'>조회하기</button>
+    </p>
+</div>
+<div class='container'>
+    <h5 class="my-3 border-bottom pb2">코로나 백신 예약 취소하기</h5>
+    <form action="{% url 'pybo:reservation_delete' %}" method='post' class='post-form my-3'>
+        {% csrf_token %}
+        <p>예약 번호를 입력하세요</p>
+        예약 번호 : <input type="text" name="ID" id="ID"><br>
+       <br>
+        <button type='submit' class='btn btn-primary'>취소하기</button>
+    </form>
+</div>
+<br>    
+{% endblock %}
