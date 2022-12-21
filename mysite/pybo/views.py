@@ -87,7 +87,7 @@ def reservation_check(request):
     else:
         form = ReservationForm()
         info = Reservation.objects
-    context = {'form' : form, 'info' : info}
+    context = {'form' : form, 'info' : info, 'state' : 'True'}
     return render(request, 'pybo/reservation_check.html', context)
 
 def reservation_delete(request):
