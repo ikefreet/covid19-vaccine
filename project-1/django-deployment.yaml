@@ -35,7 +35,7 @@ spec:
         app: django
     spec:
       containers:
-      - image: guddn1963/django:3.2
+      - image: guddn1963/django:4.0
         name: django-app
         ports:
         - containerPort: 8080
