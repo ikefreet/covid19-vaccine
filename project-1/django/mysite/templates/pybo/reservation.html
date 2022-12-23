@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container'>
+    <h3 class="my-3 border-bottom pb2">코로나 백신 예약하기</h3>
+<ul class="list-group">
+    <div class="box-use">
+        <h5>개인정보 수집 및 이용에 대한 안내</h5>
+        <p>「감염병의 예방 및 관리에 관한 법률」 <br />
+            제33조의 4 및 같은 법 시행령 제32조의 3에 따라 코로나19 예방접종 예약신청을 위하여 다음의 개인정보를 수집합니다.</p>
+    </div>
+    <br/>
+    <form action="{% url 'pybo:reservation' %}" method='post' class='post-form my-3'>
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <!-- 오류표시 End -->
+        <li class="list-group-item">
+            <div class="form-row" >
+                <h6>접종받는 분 이름<i class="reqire">*</i></h6>
+                <input type="text" name="NAME" id="NAME" value="" class="korean" maxlength="80"/>
+            </div><!-- //form-row -->
+        </li>
+        <li class="list-group-item">
+            <div class="form-row">
+                <h6>접종받는 분 생년월일<i class="reqire">*</i></h6>
+                <input type="text" name="BIRTH" id="BIRTH" maxlength="6" value="" onkeyup="onlyNumber(this);" pattern="\d*" onkeypress="maxLengthCheck(this);"/>
+            </div><!-- //form-row -->
+        </li>   
+        <li class="list-group-item">
+            <div class="form-row">
+                <h6>병원 선택</h6>
+                <select name="HOSPITAL" id='HOSPITAL'>
+                <option value="0">병원을 고르세요</option>
+                   <option value="가">가 병원</option>
+                   <option value="나">나 병원</option>
+                   <option value="다">다 병원</option>
+                </select>
+            </div><!-- //form-row -->
+        </li>
+        <li class="list-group-item">
+            <div class="form-row">
+                <h6>예약대상 백신선택<i class="reqire">*</i></h6>
+                <span class="radio-wrap"><input type="radio" name="VACCINE" id='VACCINE' value="화이자">화이자</span>
+                <span class="radio-wrap"><input type="radio" name="VACCINE" id='VACCINE' value="모더나">모더나</span>
+                <span class="radio-wrap"><input type="radio" name="VACCINE" id='VACCINE' value="아스트라제네카">아스트라제네카</span>
+            </div><!-- //form-row -->
+        </li>
+        <li class="list-group-item">
+            <div class="form-row">
+                <h6>날짜 선택<i class="reqire">*</i></h6>
+                <input type="date" name="DATE" id='DATE'>
+                <br>
+                <br>
+                <h6>시간 선택</h6>
+                <select name="HOUR">
+                    <option value="0" id='HOUR'>시간을 선택하세요.</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                </select>
+            </div><!-- //form-row -->
+        </li>
+           <br>
+           <br>
+        <div class="btn-group gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'pybo:index' %}" class="btn btn-secondary btn-lg">뒤로가기</a>
+            <button type="submit" class="btn btn-primary btn-lg">예약하기</button>
+        </div>
+        </form><!-- //form action -->
+    </ul>
+    <script>
+        var now_utc = Date.now()
+        var timeOff = new Date().getTimezoneOffset()*60000;
+        var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+        document.getElementById("Date").setAttribute("min", today);
+    </script>
+</div>  
+{% endblock %}
