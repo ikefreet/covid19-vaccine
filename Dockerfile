@@ -3,6 +3,7 @@ EXPOSE 8080
 COPY . .
 RUN apk update
 RUN apk add gcc musl-dev mariadb-connector-c-dev 
+RUN apk add mysql-client
 RUN pip3 install -r requirements.txt --no-cache-dir
 RUN apk del gcc musl-dev
 RUN pip install pymysql
