@@ -83,6 +83,14 @@ DATABASES = {
         'PASSWORD' : 'dkagh1.',
         'HOST' : 'mydb',
         'PORT' : '3306',
+    },
+    'slave': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'USER' : 'root',
+        'PASSWORD' : 'dkagh1.',
+        'HOST' : 'mydb-read',
+        'PORT' : '3306',
     }
 }
 
