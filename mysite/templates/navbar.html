@@ -1,26 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'pybo:index' %}">백신 예약</a>
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    {% if user.is_authenticated %}
-                    <a class='nav-link' href="{% url 'common:logout' %}">
-                        {{user.username}}(로그아웃)
-                    </a>
-                    {% else %}
-                    <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
+      <a class="navbar-brand" href="{% url 'pybo:index' %}">VACCINE+</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'pybo:reservation' %}">예약하기</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'pybo:reservation_check' %}">예약조회/변경/취소</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'pybo:index' %}">질의응답(QnA)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">코로나19 예방접종 사전예약 시스템</a>
+          </li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
