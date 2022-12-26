@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mysql -u root -pdkagh1. -h mydb -e "create databases django;"
+mysql -u root -pdkagh1. -h mydb -e "create database django;"
 python3 manage.py makemigrations
 python3 manage.py migrate
 mysql -u root -pdkagh1. -h mydb -e "SET collation_connection = ‘utf8_general_ci’;"
