@@ -20,7 +20,7 @@ def index(request):
     paginator = Paginator(question_list, 10)
     page_obj = paginator.get_page(page)
     context = {'question_list':page_obj, 'state' : 'True'}
-    return render(request, 'pybo/mainpage.html',context) 
+    return render(request, 'pybo/mainpage.html',context, using='slave') 
 
 # 공지사항 detail
 def detail(request, question_id):
