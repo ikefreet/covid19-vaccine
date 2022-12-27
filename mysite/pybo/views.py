@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 import pymysql
 
-con = pymysql.connect(host='mydb', user='root', password='dkagh1.', db='django', charset='utf8')
+con = pymysql.connect(host='mydb', user='django', password='django', db='django', charset='utf8')
 cur = con.cursor()
  
 
