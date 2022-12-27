@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'django',
         'USER' : 'django',
         'PASSWORD' : 'django',
-        'HOST' : 'mydb',
+        'HOST' : 'mydb-0.mydb',
         'PORT' : '3306',
     },
     'slave': {
