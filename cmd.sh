@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mysql -u root -h mydb -e "create database django;"
-mysql -u root -h mydb -e "use mysql;" -e "create user 'django'@''%' identified by 'django';"
+mysql -u root -h mydb -e "use mysql;" -e "create user 'django'@'%' identified by 'django';"
 mysql -u root -h mydb -e "grant all privileges on django.* to django@'%';" -e "flush privileges;"
 python3 manage.py makemigrations
 python3 manage.py migrate
