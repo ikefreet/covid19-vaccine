@@ -57,10 +57,12 @@ def reservation(request):
                 con.commit()
                 cur.execute(id, [request.POST['HOSPITAL'], request.POST['HOUR']])
                 y = cur.fetchone()
-                context = {'state' : y[0]}
+                question_list = Question.objects.order_by('-create_date')
+                context = {'state' : y[0], 'question_list' : question_list}
                 return render(request, 'pybo/mainpage.html', context)
             else:
-                context = { 'state' : 'False' }
+                question_list = Question.objects.order_by('-create_date')
+                context = { 'state' : 'False' , 'question_list' : question_list}
                 return render(request, 'pybo/mainpage.html', context)
     else:
         form = ReservationForm()
@@ -99,10 +101,12 @@ def reservation_delete(request):
         if x is not None:
             cur.execute(st, [id])
             con.commit()
-            context = {'state' : 'Delete'}
+            question_list = Question.objects.order_by('-create_date')
+            context = {'state' : 'Delete', 'question_list' : question_list}
             return render(request, 'pybo/mainpage.html', context)
         else:
-            context = { 'state' : 'Error' }
+            question_list = Question.objects.order_by('-create_date')
+            context = { 'state' : 'Error', 'question_list' : question_list}
             return render(request, 'pybo/mainpage.html', context)
     else:
         form = ReservationForm()
