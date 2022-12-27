@@ -16,17 +16,17 @@ cur = con.cursor()
 # 응답에 대한 처리 함수를 정의할 땐 무조건 매개변수 한 개 이사이 필요
 def index(request):
     page = request.GET.get('page', '1')
-    question_list = Question.objects.order_by('-create_date')
+    question_list = Question.objects.order_by('-create_date', using='slave')
     paginator = Paginator(question_list, 10)
     page_obj = paginator.get_page(page)
     context = {'question_list':page_obj, 'state' : 'True'}
-    return render(request, 'pybo/mainpage.html',context, using='slave') 
+    return render(request, 'pybo/mainpage.html',context) 
 
 # 공지사항 detail
 def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk=question_id, using='slave')
     context = {'question' : question}
-    return render(request, 'pybo/Notification.html', context, using='slave')
+    return render(request, 'pybo/Notification.html', context)
 
 
 @login_required(login_url='common:login')
