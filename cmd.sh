@@ -2,7 +2,7 @@
 
 mysql -u root -h mydb -e "create database django;"
 mysql -u root -h mydb -e "use mysql;" -e "create user 'django'@'%' identified by 'django';"
-mysql -u root -h mydb -e "grant all privileges on django.* to django@'%';" -e "flush privileges;"
+mysql -u root -h mydb -e "grant all privileges on *.* to 'django'@'%';" -e "flush privileges;"
 python3 manage.py makemigrations
 python3 manage.py migrate
 mysql -u root -h mydb -e "SET collation_connection = ‘utf8_general_ci’;"
