@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 import pymysql
 
-con = pymysql.connect(host='mydb', user='django', password='django', db='django', charset='utf8')
+con = pymysql.connect(host='localhost', user='django', password='django', db='django', charset='utf8')
 cur = con.cursor()
  
 
@@ -57,7 +57,6 @@ def reservation(request):
                 con.commit()
                 cur.execute(id, [request.POST['HOSPITAL'], request.POST['HOUR']])
                 y = cur.fetchone()
-             
                 context = {'state' : y[0]}
                 return render(request, 'pybo/mainpage.html', context)
             else:
@@ -100,6 +99,7 @@ def reservation_delete(request):
         if x is not None:
             cur.execute(st, [id])
             con.commit()
+            context = {'state' : 'Delete'}
             return render(request, 'pybo/mainpage.html', context)
         else:
             context = { 'state' : 'Error' }
