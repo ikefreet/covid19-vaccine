@@ -15,11 +15,8 @@ cur = con.cursor()
 # Create your views here.
 # 응답에 대한 처리 함수를 정의할 땐 무조건 매개변수 한 개 이사이 필요
 def index(request):
-    page = request.GET.get('page', '1')
-    question_list = Question.objects.order_by('-create_date').using('slave')
-    paginator = Paginator(question_list, 10)
-    page_obj = paginator.get_page(page)
-    context = {'question_list':page_obj, 'state' : 'True'}
+    question_list = Question.objects.all().using('slave')
+    context = {'question_list':question_list, 'state' : 'True'}
     return render(request, 'pybo/mainpage.html',context) 
 
 # 공지사항 detail
