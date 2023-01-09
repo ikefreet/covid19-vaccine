@@ -1,6 +1,5 @@
 node {
-
-  stages {
+  
     stage('Checkout') {
         git branch: 'main', url: 'https://github.com/ikefreet/covid19-vaccine.git'
     }
@@ -18,7 +17,6 @@ node {
           sh 'docker image push efreet05/django:$BUILD_NUMBER'
       }
     }
-  }
 }
 
 
