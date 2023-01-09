@@ -7,7 +7,7 @@ node {
         sh 'echo jyhfpkcs%% | docker login -u efreet05 --password-stdin' // docker hub 로그인
     }
     stage('Build Docker Image') {
-        sh 'docker image build -t efreet05/django:latest .'
+        sh 'docker image build --network host -t efreet05/django:latest .'
     }
     stage('Tag Docker Image') {
         sh 'docker image tag efreet05/django:latest efreet05/django:$BUILD_NUMBER'
