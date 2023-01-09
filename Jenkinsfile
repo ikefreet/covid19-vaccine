@@ -5,7 +5,7 @@ node {
         git branch: 'main', url: 'https://github.com/ikefreet/covid19-vaccine.git'
     }
     stage('Login'){
-              sh 'echo jyhfpkcs%% | docker login -u efreet05 --password-stdin' // docker hub 로그인
+        sh 'echo jyhfpkcs%% | docker login -u efreet05 --password-stdin' // docker hub 로그인
     }
     stage('Build Docker Image') {
         sh 'docker image build -t efreet05/django:latest .'
