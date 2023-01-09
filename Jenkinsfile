@@ -12,6 +12,7 @@ pipeline {
           steps{
               sh 'echo jyhfpkcs%% | docker login -u efreet05 --password-stdin' // docker hub 로그인
           }
+    }
     stage('Build Docker Image') {
       agent any
       steps {
