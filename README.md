@@ -5,6 +5,11 @@ Covid19-Vaccine Reservation Web Service with K8s
 
 <img src="https://drive.google.com/file/d/1TWAc3rjebSnZBcjkGpW1_5f4X4tqRJka/view?usp=sharing">
 
+* Infrastructure with VirtualBox & Unbuntu
+* Web Service using Kubernetes & Django
+* Django Database using MySQL
+* Jenkins CI Pipeline
+
 조원|역할
 ---|---|
 강대현|Kubernetes 구축, CI 구축, 웹 애플리케이션/서비스 개발
