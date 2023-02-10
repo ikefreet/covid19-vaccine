@@ -3,7 +3,7 @@ Covid19-Vaccine Reservation Web Service with K8s
 
 코로나 백신을 예약할 수 있는 쿠버네티스 기반 웹 서비스
 
-![alt K8s 구성도](https://drive.google.com/file/d/1TWAc3rjebSnZBcjkGpW1_5f4X4tqRJka/view?usp=sharing)
+[alt K8s 구성도](https://drive.google.com/file/d/1TWAc3rjebSnZBcjkGpW1_5f4X4tqRJka/view?usp=sharing)
 
 조원|역할
 ---|---|
