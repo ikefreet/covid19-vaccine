@@ -3,9 +3,10 @@ Covid19-Vaccine Reservation Web Service with K8s
 
 코로나 백신을 예약할 수 있는 쿠버네티스 기반 웹 서비스
 
-### Kubernetes Cluster 구성도
+## Kubernetes Cluster Structure
 <img src="https://github.com/ikefreet/Projects-images/blob/main/Covid19/%EA%B5%AC%EC%84%B1%EB%8F%841.png">
 
+## Structure
 * Infrastructure with VirtualBox & Unbuntu
 * Web Service with Kubernetes & Django
 * Django Database with MySQL
@@ -13,6 +14,7 @@ Covid19-Vaccine Reservation Web Service with K8s
 * Monitoring with Prometheus & Grafana
 * Logging with Elasticsearch & Fluentbit & Kibana
 
+## Team
 조원|역할
 ---|---|
 강대현|Kubernetes 구축, CI 구축, 웹 애플리케이션/서비스 개발
