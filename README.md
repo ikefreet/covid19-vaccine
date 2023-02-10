@@ -6,12 +6,12 @@
 <img src="https://github.com/ikefreet/Projects-images/blob/main/Covid19/%EA%B5%AC%EC%84%B1%EB%8F%841.png">
 
 ## Structure
-* Infrastructure with VirtualBox & Unbuntu
-* Web Service with Kubernetes & Django
-* Django Database with MySQL
-* CI Pipeline with Jenkins
-* Monitoring with Prometheus & Grafana
-* Logging with Elasticsearch & Fluentbit & Kibana
+* Infrastructure with **VirtualBox & Unbuntu**
+* Web Service with **Kubernetes & Django**
+* Django Database with **MySQL**
+* CI Pipeline with **Jenkins**
+* Monitoring with **Prometheus & Grafana**
+* Logging with **Elasticsearch & Fluentbit & Kibana**
 
 ## Team
 조원|역할
