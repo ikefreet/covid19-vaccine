@@ -6,9 +6,11 @@ Covid19-Vaccine Reservation Web Service with K8s
 <img src="https://drive.google.com/file/d/1TWAc3rjebSnZBcjkGpW1_5f4X4tqRJka/view?usp=sharing">
 
 * Infrastructure with VirtualBox & Unbuntu
-* Web Service using Kubernetes & Django
-* Django Database using MySQL
-* Jenkins CI Pipeline
+* Web Service with Kubernetes & Django
+* Django Database with MySQL
+* CI Pipeline with Jenkins
+* Monitoring with Prometheus & Grafana
+* Logging with Elasticsearch & Fluentbit & Kibana
 
 조원|역할
 ---|---|
