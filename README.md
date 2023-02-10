@@ -1,7 +1,15 @@
-CCCR 1조 최종 프로젝트
+Covid19-Vaccine Reservation
 ===================
 Covid19-Vaccine Reservation Web Site with K8s
 
+조원|역할
+---|---|
+강대현|Kubernetes 구축, CI 구축, 웹 애플리케이션/서비스 개발
+김혜미|웹 서비스 개발, 웹 디자인
+박윤지|웹 디자인
+이승규|웹 애플리케이션 개발, 웹 서비스 개발
+장여진|웹 디자인
+최형우|웹 서비스 개발, Database 
 
 
 
@@ -16,8 +24,3 @@ Covid19-Vaccine Reservation Web Site with K8s
 
 
 
-
-
-
-#### # git push 후 directory 접근 에러 현상
-https://zzang9ha.tistory.com/346 
