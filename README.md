@@ -1,4 +1,4 @@
-Covid19-Vaccine Reservation Web Application Service with K8s
+Covid19-Vaccine Reservation Web Service with K8s
 ===================
 
 조원|역할
